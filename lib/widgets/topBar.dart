@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:icm/utils/custom_colors.dart';
 
 class TopBar extends StatelessWidget {
@@ -9,7 +10,7 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: Get.height * 0.17,
       decoration: const BoxDecoration(
           color: primaryColor,
           borderRadius: BorderRadius.only(

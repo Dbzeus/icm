@@ -6,4 +6,5 @@ class AppRoutes {
   static const serviceScreen = "/serviceScreen";
   static const meterScreen = "/meterScreen";
   static const readingScreen = "/readingScreen";
+  static const qrScanScreen = "/qrScanScreen";
 }

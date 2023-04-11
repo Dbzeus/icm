@@ -12,129 +12,135 @@ class ServiceScreen extends GetView<ServiceController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          TopBar(
-              widget: Positioned(
-            bottom: 20,
-            child: Padding(
+    return GestureDetector(
+      onTap: () {
+        Get.focusScope!.unfocus();
+      },
+      child: Scaffold(
+        body: Column(
+          children: [
+            TopBar(
+                widget: Positioned(
+              bottom: 20,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Container(
+                        height: 35,
+                        width: 35,
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle, color: bgColor),
+                        child: const Icon(
+                          Icons.arrow_back_ios_outlined,
+                          size: 14,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      "Service",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+              ),
+            )),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Container(
-                      height: 35,
-                      width: 35,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: bgColor),
-                      child: const Icon(
-                        Icons.arrow_back_ios_outlined,
-                        size: 14,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    "Service",
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ],
+              child: CustomEditText(
+                hintText: "Search Services..",
+                controller: controller.searchController,
+                prefixIcon: const Icon(Icons.search),
               ),
             ),
-          )),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: CustomEditText(
-              hintText: "Search Services..",
-              controller: controller.searchController,
-              prefixIcon: const Icon(Icons.search),
+            const SizedBox(
+              height: 15,
             ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Obx(
-            () => Container(
-              height: 50,
-              width: double.infinity,
-              margin: const EdgeInsets.symmetric(horizontal: 18),
-              //padding: const EdgeInsets.symmetric(horizontal: 8),
-              decoration: BoxDecoration(
-                  color: taskColor, borderRadius: BorderRadius.circular(12)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(horizontal: 48),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: controller.isTask.value ? bgColor : taskColor),
-                      height: 40,
-                      child: Center(
-                        child: Text(
-                          "Pending",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: controller.isTask.value
-                                  ? primaryColor
-                                  : lightTextColor),
+            Obx(
+              () => Container(
+                height: 50,
+                width: double.infinity,
+                margin: const EdgeInsets.symmetric(horizontal: 18),
+                //padding: const EdgeInsets.symmetric(horizontal: 8),
+                decoration: BoxDecoration(
+                    color: taskColor, borderRadius: BorderRadius.circular(12)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(horizontal: 48),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color:
+                                controller.isTask.value ? bgColor : taskColor),
+                        height: 40,
+                        child: Center(
+                          child: Text(
+                            "Pending",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                                color: controller.isTask.value
+                                    ? primaryColor
+                                    : lightTextColor),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(horizontal: 48),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color:
-                              !controller.isTask.value ? bgColor : taskColor),
-                      height: 40,
-                      child: Center(
-                        child: Text(
-                          "Completed",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: !controller.isTask.value
-                                  ? primaryColor
-                                  : lightTextColor),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(horizontal: 48),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color:
+                                !controller.isTask.value ? bgColor : taskColor),
+                        height: 40,
+                        child: Center(
+                          child: Text(
+                            "Completed",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                                color: !controller.isTask.value
+                                    ? primaryColor
+                                    : lightTextColor),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemBuilder: (__, _) => showTenantList(),
-            ),
-          )
-        ],
+            Expanded(
+              child: ListView.builder(
+                itemCount: 10,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemBuilder: (__, _) => showTenantList(),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
