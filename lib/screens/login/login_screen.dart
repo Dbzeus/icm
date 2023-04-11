@@ -9,7 +9,9 @@ import '../../routes/app_routes.dart';
 import '../../widgets/custom_button.dart';
 
 class LogInScreen extends GetView<LogInController> {
+  @override
   final controller = Get.put(LogInController());
+
   LogInScreen({Key? key}) : super(key: key);
 
   @override
@@ -35,16 +37,18 @@ class LogInScreen extends GetView<LogInController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         IconButton(
                           icon: const Icon(
                             Icons.arrow_back_ios,
-                            size: 14,
+                            size: 15,
                           ),
                           onPressed: () {
                             Get.back();
                           },
                         ),
+
                         const Center(
                           child: Text(
                             "Sign In",
@@ -107,7 +111,7 @@ class LogInScreen extends GetView<LogInController> {
                       () => CustomEditText(
                         hintText: "Enter your password",
                         controller: controller.passwordController,
-                        obscureText: controller.isVisible.value ? true : false,
+                        obscureText: controller.isVisible.value,
                         suffixIcon: IconButton(
                           splashRadius: 20,
                           onPressed: () {
@@ -128,17 +132,20 @@ class LogInScreen extends GetView<LogInController> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                                value: controller.rememberMe.value,
-                                onChanged: (val) {}),
-                            const Text(
-                              "Remember Me",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600, fontSize: 12),
-                            ),
-                          ],
+                        Visibility(
+                          visible: false,
+                          child: Row(
+                            children: [
+                              Checkbox(
+                                  value: controller.rememberMe.value,
+                                  onChanged: (val) {}),
+                              const Text(
+                                "Remember Me",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 12),
+                              ),
+                            ],
+                          ),
                         ),
                         const Text(
                           "Forgot Password?",

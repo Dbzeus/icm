@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:icm/screens/tenant/tenant_controller.dart';
 import 'package:icm/utils/custom_colors.dart';
 import 'package:icm/widgets/custom_edittext.dart';
-import 'package:icm/widgets/topBar.dart';
+import 'package:icm/widgets/top_bar.dart';
 
 import '../../routes/app_routes.dart';
 

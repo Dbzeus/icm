@@ -4,6 +4,7 @@ import 'package:icm/utils/custom_colors.dart';
 class CustomButton extends StatelessWidget {
   double? height, width;
   double? borderRadius;
+  Color textColor;
   String text;
   Function() onTap;
   EdgeInsets? margin;
@@ -14,6 +15,7 @@ class CustomButton extends StatelessWidget {
     this.height,
     this.margin,
     this.borderRadius,
+    this.textColor=white,
     required this.text,
     required this.onTap,
   }) : super(key: key);
@@ -33,7 +35,7 @@ class CustomButton extends StatelessWidget {
         child: Center(
             child: Text(
           text,
-          style: const TextStyle(color: bgColor),
+          style: TextStyle(color: textColor),
         )),
       ),
     );

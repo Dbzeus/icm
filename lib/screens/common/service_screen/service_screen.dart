@@ -4,7 +4,7 @@ import 'package:icm/screens/common/service_screen/service_controller.dart';
 import 'package:icm/utils/custom_colors.dart';
 
 import '../../../widgets/custom_edittext.dart';
-import '../../../widgets/topBar.dart';
+import '../../../widgets/top_bar.dart';
 
 class ServiceScreen extends GetView<ServiceController> {
   final controller = Get.put(ServiceController());

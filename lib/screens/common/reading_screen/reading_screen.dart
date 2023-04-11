@@ -4,7 +4,7 @@ import 'package:icm/screens/common/reading_screen/reading_controller.dart';
 import 'package:icm/utils/custom_colors.dart';
 import 'package:icm/widgets/custom_button.dart';
 import 'package:icm/widgets/custom_edittext.dart';
-import 'package:icm/widgets/topBar.dart';
+import 'package:icm/widgets/top_bar.dart';
 
 class ReadingScreen extends GetView<ReadingController> {
   final controller = Get.put(ReadingController());

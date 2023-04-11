@@ -36,13 +36,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     precacheImage(
-        AssetImage(
+        const AssetImage(
           "assets/background/bgImage.jpg",
         ),
         context);
     return GetMaterialApp(
       title: 'ICM',
-
       //navigatorKey: alice.getNavigatorKey(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -63,7 +62,8 @@ class MyApp extends StatelessWidget {
               900: Color.fromRGBO(38, 38, 38, 1), //100%
             },
           ),
-          fontFamily: 'Inter'),
+          textTheme: GoogleFonts.interTextTheme()
+          ),
 
       initialRoute: initialRoute,
       getPages: AppPages.routes,

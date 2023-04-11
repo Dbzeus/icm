@@ -10,7 +10,7 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.height * 0.17,
+      height: MediaQuery.of(context).size.height * 0.15,
       decoration: const BoxDecoration(
           color: primaryColor,
           borderRadius: BorderRadius.only(
@@ -25,7 +25,9 @@ class TopBar extends StatelessWidget {
             height: double.infinity,
             fit: BoxFit.cover,
           ),
-          widget,
+          Positioned(
+              bottom: 20,
+              child: widget),
         ],
       ),
     );
