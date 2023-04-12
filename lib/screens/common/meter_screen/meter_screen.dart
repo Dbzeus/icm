@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:icm/routes/app_routes.dart';
 import 'package:icm/screens/common/meter_screen/meter_controller.dart';
 import 'package:icm/utils/custom_colors.dart';
-import 'package:icm/widgets/topBar.dart';
+import 'package:icm/widgets/top_bar.dart';
 
 class MeterScreen extends GetView<MeterController> {
   final controller = Get.put(MeterController());

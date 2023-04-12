@@ -6,7 +6,10 @@ import 'package:icm/utils/custom_colors.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRScanScreen extends GetView<QRScanController> {
+  @override
   final controller = Get.put(QRScanController());
+
+  QRScanScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +17,6 @@ class QRScanScreen extends GetView<QRScanController> {
       body: Stack(
         children: [
           _buildQrView(),
-          //_buildQRView(context),
-          //_buildSplitBorder(context),
           Positioned(
             top: 32,
             left: 0,
@@ -28,30 +29,33 @@ class QRScanScreen extends GetView<QRScanController> {
                       Get.back();
                     },
                     color: Colors.white,
-                    icon: Icon(Icons.arrow_back)),
-                IconButton(
+                    icon: const Icon(Icons.arrow_back)),
+                Obx(()=>IconButton(
                     onPressed: () {
-                      /*controller.qrController?.toggleFlash();
+                      controller.qrController?.toggleFlash();
                       controller.flash(
                           (controller.flash.value == Icons.flash_on)
                               ? Icons.flash_off
-                              : Icons.flash_on);*/
+                              : Icons.flash_on);
                     },
                     color: Colors.white,
-                    icon: Icon(Icons.flash_on)),
+                    icon: const Icon(Icons.flash_on)),),
               ],
             ),
           ),
           Positioned(
-            top: Get.height * 0.7,
-            left: Get.width * 0.28,
-
-            child: const Text(
-              "Please place the Qr Code \n      inside of the Square",
-              style: TextStyle(
-
-                  fontSize: 14,
-                  color: bgColor),
+            top: MediaQuery.of(context).size.height * 0.75,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: const Text(
+                "Please place the Qr Code\ninside of the Square",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 14,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.w400,
+                    color: textColor),
+              ),
             ),
           ),
         ],
@@ -81,40 +85,14 @@ class QRScanScreen extends GetView<QRScanController> {
             }
           },
         ),
-        /*Obx(() => controller.isLoading.value
-            ? Center(
+        Obx(() => controller.isLoading.value
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : const SizedBox.shrink()),*/
+            : const SizedBox.shrink()),
       ],
     );
   }
- /* Widget _buildQRView(BuildContext context) {
-    return QRView(
-      key:  GlobalKey(debugLabel: 'QR'),
-      onQRViewCreated: controller.onQRViewCreated,
-      overlay: QrScannerOverlayShape(
-        borderColor: Theme.of(context).accentColor,
-        borderRadius: 16,
-        borderLength: 24,
-        borderWidth: 8,
-        cutOutSize: MediaQuery.of(context).size.width * 0.8,
-      ),
-    );
-  }
-  Widget _buildSplitBorder(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 8,
-        ),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      margin: EdgeInsets.symmetric(
-        horizontal: MediaQuery.of(context).size.width * 0.1,
-        vertical: MediaQuery.of(context).size.height * 0.2,
-      ),
-    );
-  }*/
+
 
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icm/routes/app_routes.dart';
 import 'package:icm/utils/custom_colors.dart';
-import 'package:icm/widgets/topBar.dart';
+import 'package:icm/widgets/top_bar.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import 'home_controller.dart';
@@ -10,6 +10,7 @@ import 'home_controller.dart';
 class HomeScreen extends GetView<HomeController> {
   final controller = Get.put(HomeController());
   double value = 15.0;
+
   HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -19,61 +20,57 @@ class HomeScreen extends GetView<HomeController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TopBar(
-              widget: Positioned(
-            bottom: 20,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      const CircleAvatar(
-                        backgroundColor: bgColor,
-                        child: const CircleAvatar(
-                          backgroundColor: primaryColor,
-                          radius: 23,
-                        ),
-                        radius: 25,
+              widget: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    const CircleAvatar(
+                      backgroundColor: bgColor,
+                      radius: 25,
+                      child: CircleAvatar(
+                        backgroundColor: primaryColor,
+                        radius: 23,
                       ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Welcome back 👋",
-                            style:
-                                TextStyle(fontSize: 14, color: lightTextColor),
-                          ),
-                          Text(
-                            "Dinesh",
-                            style: TextStyle(fontSize: 16, color: Colors.white),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Image.asset(
-                      "assets/icon/logout.png",
-                      width: 45,
-                      height: 45,
-                      fit: BoxFit.cover,
                     ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Welcome back 👋",
+                          style: TextStyle(fontSize: 14, color: lightTextColor),
+                        ),
+                        Text(
+                          "Dinesh",
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Image.asset(
+                    "assets/icon/logout.png",
+                    width: 35,
+                    height: 35,
+                    fit: BoxFit.cover,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           )),
           const SizedBox(
             height: 30,
           ),
-        /*  GestureDetector(
+          /*  GestureDetector(
             onTap: () {
               Get.toNamed(AppRoutes.qrScanScreen);
             },
@@ -130,16 +127,103 @@ class HomeScreen extends GetView<HomeController> {
             height: 150,
             width: 150,
             margin: const EdgeInsets.symmetric(horizontal: 16),
-            /*padding: const EdgeInsets.symmetric(
-                    vertical: 16, horizontal: 12),*/
+            padding: const EdgeInsets.symmetric(
+                    vertical: 16, horizontal: 12),
             decoration: BoxDecoration(
                 color: bgColor,
                 border: Border.all(color: taskLightColor),
                 borderRadius: BorderRadius.circular(16)),
+            child: SfRadialGauge(axes: <RadialAxis>[
+              RadialAxis(
+                minimum: 0,
+                maximum: 100,
+                showLabels: false,
+                showTicks: false,
+                startAngle: 120,
+                endAngle: 60,
+                radiusFactor: 0.9,
+                axisLineStyle: AxisLineStyle(
+                  thickness: 0.1,
+                  color: const Color.fromARGB(30, 0, 169, 181),
+                  thicknessUnit: GaugeSizeUnit.factor,
+                ),
+                pointers: <GaugePointer>[
+                  RangePointer(
+                    value: 70,
+                    width: 0.05,
+                    pointerOffset: 0.07,
+                    sizeUnit: GaugeSizeUnit.factor,
+                  )
+                ],
+              ),
+              // Create secondary radial axis for segmented line
+              RadialAxis(
+                minimum: 0,
+                interval: 1,
+                maximum: 40,
+                showLabels: false,
+                showTicks: true,
+                showAxisLine: false,
+                tickOffset: -0.05,
+                offsetUnit: GaugeSizeUnit.factor,
+                minorTicksPerInterval: 0,
+                startAngle: 120,
+                endAngle: 60,
+                radiusFactor: 0.9,
 
-            /*SfRadialGauge(
+                majorTickStyle: MajorTickStyle(
+                    length: 0.3,
+                    thickness: 3,
+                    lengthUnit: GaugeSizeUnit.factor,
+                    color: Colors.white),
+              )
+              // Create primary radial axis
+              /*RadialAxis(
+                minimum: 0,
+                interval: 1,
+                maximum: 100,
+                showLabels: false,
+                showTicks: true,
+                startAngle: 120,
+                endAngle: 60,
+                radiusFactor: 0.9,
+                axisLineStyle: const AxisLineStyle(
+                  thickness: 0.2,
+                  color: Colors.transparent,
+                ),
+
+                majorTickStyle: const MajorTickStyle(
+                    length: 0.5,
+                    thickness: 10,
+                    color: Colors.transparent),
+              ),*/
+              // secondary primary radial axis
+              // RadialAxis(
+              //   minimum: 0,
+              //   interval: 1,
+              //   maximum: 100,
+              //   showLabels: false,
+              //   showTicks: true,
+              //   startAngle: 120,
+              //   endAngle: 60,
+              //   radiusFactor: 0.9,
+              //   axisLineStyle: AxisLineStyle(
+              //     thickness: 0.1,
+              //     color: Colors.transparent,
+              //
+              //   ),
+              //
+              //   majorTickStyle: MajorTickStyle(
+              //       length: 0.5,
+              //       thickness: 10,
+              //       color: Colors.transparent),
+              // ),
+
+            ]),
+
+            /*child: SfRadialGauge(
                 axes: <RadialAxis>[
-                  */ /*RadialAxis(
+                   RadialAxis(
                     minimum: 0,
                     maximum: 20,
                     showLabels: false,
@@ -180,17 +264,17 @@ class HomeScreen extends GetView<HomeController> {
                         thickness: 3,
                         lengthUnit: GaugeSizeUnit.factor,
                         color: Colors.white),
-                  )*/ /*
+                  )
                 ],
-                */ /*title: GaugeTitle(
+                 title: GaugeTitle(
                     text: 'title',
                     textStyle: TextStyle(
                       color: Colors.red,
                       fontSize: 12,
-                      */ /* */ /*fontStyle: FontStyle.normal,
+                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w400,
-                        fontFamily: 'Roboto'*/ /* */ /*
-                    )),*/ /*
+                        fontFamily: 'Roboto'
+                    )),
               )*/
           ),
         ],
@@ -227,39 +311,36 @@ class HomeScreen extends GetView<HomeController> {
               )
             ],
           ),
-        ),*/ BottomNavigationBar(
-
-          onTap: (index) {
-            controller.selectedIndex(index);
-            if (index == 1) {
-              Get.toNamed(AppRoutes.tenantScreen);
-            }
-          },
-          currentIndex: controller.selectedIndex.value,
-          selectedItemColor: primaryColor,
-          unselectedItemColor: lightTextColor,
-          showUnselectedLabels: true,
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home_filled,
-                ),
-                label: "Home"),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.person,
-                ),
-                label: "Tenants")
-          ],
-        ),
-
+        ),*/
+          BottomNavigationBar(
+        onTap: (index) {
+          controller.selectedIndex(index);
+          if (index == 1) {
+            Get.toNamed(AppRoutes.tenantScreen);
+          }
+        },
+        currentIndex: controller.selectedIndex.value,
+        selectedItemColor: primaryColor,
+        unselectedItemColor: lightTextColor,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home_filled,
+              ),
+              label: "Home"),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person,
+              ),
+              label: "Tenants")
+        ],
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.toNamed(
-            AppRoutes.qrScanScreen
-          );
+          Get.toNamed(AppRoutes.qrScanScreen);
         },
         backgroundColor: bgColor,
         child: Image.asset(
