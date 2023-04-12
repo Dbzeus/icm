@@ -79,7 +79,7 @@ class LogInScreen extends GetView<LogInController> {
                       height: 40,
                     ),
                     const Text(
-                      "Mobile Number",
+                      "UserName",
                       style:
                           TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                     ),
@@ -87,10 +87,10 @@ class LogInScreen extends GetView<LogInController> {
                       height: 10,
                     ),
                     CustomEditText(
-                      hintText: "Enter Your MobileNumber",
-                      controller: controller.mobNoController,
-                      maxLength: 10,
-                      keyboardType: TextInputType.number,
+                      hintText: "Enter Your username",
+                      controller: controller.userNameController,
+
+
                     ),
                     const SizedBox(
                       height: 10,
@@ -153,7 +153,7 @@ class LogInScreen extends GetView<LogInController> {
                     CustomButton(
                       text: "Sign In",
                       onTap: () {
-                        Get.toNamed(AppRoutes.homeScreen);
+                      controller.logIn();
                       },
                       //margin: const EdgeInsets.symmetric(horizontal: 12),
                       borderRadius: 5.0,

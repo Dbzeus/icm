@@ -27,6 +27,9 @@ dependencies:
   flutter_native_splash:
   syncfusion_flutter_gauges:
   qr_code_scanner:
+  geolocator:
+  app_settings:
+
 
 
 

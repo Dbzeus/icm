@@ -5,7 +5,7 @@ import 'package:icm/screens/common/reading_screen/reading_screen.dart';
 import 'package:icm/screens/common/service_screen/service_screen.dart';
 import 'package:icm/screens/home/home_screen.dart';
 import 'package:icm/screens/login/login_screen.dart';
-import 'package:icm/screens/onBoarding/onBoarding.dart';
+import 'package:icm/screens/onBoarding/on_boarding.dart';
 import 'package:icm/screens/qrscan/qrscan_screen.dart';
 import 'package:icm/screens/tenant/tenant_screen.dart';
 

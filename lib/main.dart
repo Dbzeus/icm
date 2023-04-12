@@ -1,3 +1,4 @@
+import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icm/routes/app_pages.dart';
@@ -27,6 +28,11 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   String initialRoute;
+  static Alice alice = Alice(
+    showNotification: true,
+    showInspectorOnShake: true,
+  );
+
   MyApp(
     this.initialRoute, {
     Key? key,
@@ -35,11 +41,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    precacheImage(
-        AssetImage(
-          "assets/background/bgImage.jpg",
-        ),
-        context);
+
+
     return GetMaterialApp(
       title: 'ICM',
 
@@ -64,7 +67,7 @@ class MyApp extends StatelessWidget {
             },
           ),
           fontFamily: 'Inter'),
-
+      navigatorKey: alice.getNavigatorKey(),
       initialRoute: initialRoute,
       getPages: AppPages.routes,
     );
