@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:icm/api/api_call.dart';
 import 'package:icm/utils/constant_function.dart';
+import 'package:icm/utils/custom_colors.dart';
 import 'package:icm/utils/location_helper.dart';
+import 'package:icm/utils/session.dart';
 
 import '../../routes/app_routes.dart';
 
@@ -12,15 +15,18 @@ class LogInController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
   RxBool rememberMe = false.obs;
-  RxBool isVisible = false.obs;
+  RxBool isVisible = true.obs;
 
   RxBool isLoading = false.obs;
-  List data= [];
+
+
+  final _box = GetStorage();
 
   logIn() async {
     Get.focusScope!.unfocus();
     if (userNameController.text.isEmpty) {
-      toast("Enter user Name");
+
+     toast("Enter user Name");
     } else if (passwordController.text.isEmpty) {
       toast("Enter password");
     } else {
@@ -28,6 +34,8 @@ class LogInController extends GetxController {
         isLoading(true);
         //String token = (await FirebaseMessaging.instance.getToken()) ?? '';
         Position? location = await getCurrentLocation();
+        debugPrint("latitude: ${location?.latitude.toString()}");
+        debugPrint("longtitude: ${location?.longitude .toString()}");
         if (location != null) {
           var loginResponse = await ApiCall().checkLogin(
               userNameController.text, passwordController.text, "",
@@ -35,9 +43,16 @@ class LogInController extends GetxController {
               location.longitude.toString());
           isLoading(false);
           if (loginResponse != null && loginResponse['RtnStatus']) {
-            data = loginResponse["RtnData"];
+            _box.write(Session.isLogin, true);
+            _box.write(Session.userName,loginResponse["RtnData"]["FirstName"] );
+            _box.write(Session.userId,loginResponse["RtnData"]["EmployeeID"] );
+           var data = loginResponse["RtnData"];
+           debugPrint(data.toString());
             toast(loginResponse?["RtnMessage"]);
-            Get.toNamed(AppRoutes.homeScreen);
+            Get.offAllNamed(AppRoutes.homeScreen,
+            /*arguments: {
+              "userdata" : data
+            }*/);
           }
           else{
           toast(loginResponse?["RtnMessage"]);

@@ -31,6 +31,7 @@ class CustomEditText extends StatelessWidget {
       maxLength: maxLength,
       obscureText: obscureText,
       controller: controller,
+
       style: const TextStyle(fontSize: 14),
       decoration: InputDecoration(
           fillColor: taskColor,

@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:icm/routes/app_routes.dart';
 import 'package:icm/utils/custom_colors.dart';
@@ -33,6 +35,7 @@ class HomeScreen extends GetView<HomeController> {
                       backgroundColor: bgColor,
                       radius: 25,
                       child: CircleAvatar(
+                        backgroundImage: AssetImage("assets/icon/logo.png"),
                         backgroundColor: primaryColor,
                         radius: 23,
                       ),
@@ -47,9 +50,12 @@ class HomeScreen extends GetView<HomeController> {
                           "Welcome back 👋",
                           style: TextStyle(fontSize: 14, color: lightTextColor),
                         ),
-                        Text(
-                          "Dinesh",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        Obx(
+                          () => Text(
+                            controller.userName.value,
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.white),
+                          ),
                         ),
                       ],
                     )
@@ -109,9 +115,9 @@ class HomeScreen extends GetView<HomeController> {
           const SizedBox(
             height: 30,
           ),*/
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: const Text(
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
               "Overview",
               style: TextStyle(
                   fontWeight: FontWeight.w600,
@@ -120,178 +126,48 @@ class HomeScreen extends GetView<HomeController> {
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 20,
           ),
-          Container(
-            //alignment: Alignment.center,
-            height: 150,
-            width: 150,
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            padding: const EdgeInsets.symmetric(
-                    vertical: 16, horizontal: 12),
-            decoration: BoxDecoration(
-                color: bgColor,
-                border: Border.all(color: taskLightColor),
-                borderRadius: BorderRadius.circular(16)),
-            child: SfRadialGauge(axes: <RadialAxis>[
-              RadialAxis(
-                minimum: 0,
-                maximum: 100,
-                showLabels: false,
-                showTicks: false,
-                startAngle: 120,
-                endAngle: 60,
-                radiusFactor: 0.9,
-                axisLineStyle: AxisLineStyle(
-                  thickness: 0.1,
-                  color: const Color.fromARGB(30, 0, 169, 181),
-                  thicknessUnit: GaugeSizeUnit.factor,
-                ),
-                pointers: <GaugePointer>[
-                  RangePointer(
-                    value: 70,
-                    width: 0.05,
-                    pointerOffset: 0.07,
-                    sizeUnit: GaugeSizeUnit.factor,
-                  )
-                ],
-              ),
-              // Create secondary radial axis for segmented line
-              RadialAxis(
-                minimum: 0,
-                interval: 1,
-                maximum: 40,
-                showLabels: false,
-                showTicks: true,
-                showAxisLine: false,
-                tickOffset: -0.05,
-                offsetUnit: GaugeSizeUnit.factor,
-                minorTicksPerInterval: 0,
-                startAngle: 120,
-                endAngle: 60,
-                radiusFactor: 0.9,
+          Obx(()=>
+          controller.isLoading.value ? const Expanded(child:  Center(child:  CircularProgressIndicator())):
+             Expanded(
+               child: GridView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                itemCount: controller.dashboardList.length,
+                shrinkWrap: true,
 
-                majorTickStyle: MajorTickStyle(
-                    length: 0.3,
-                    thickness: 3,
-                    lengthUnit: GaugeSizeUnit.factor,
-                    color: Colors.white),
-              )
-              // Create primary radial axis
-              /*RadialAxis(
-                minimum: 0,
-                interval: 1,
-                maximum: 100,
-                showLabels: false,
-                showTicks: true,
-                startAngle: 120,
-                endAngle: 60,
-                radiusFactor: 0.9,
-                axisLineStyle: const AxisLineStyle(
-                  thickness: 0.2,
-                  color: Colors.transparent,
-                ),
-
-                majorTickStyle: const MajorTickStyle(
-                    length: 0.5,
-                    thickness: 10,
-                    color: Colors.transparent),
-              ),*/
-              // secondary primary radial axis
-              // RadialAxis(
-              //   minimum: 0,
-              //   interval: 1,
-              //   maximum: 100,
-              //   showLabels: false,
-              //   showTicks: true,
-              //   startAngle: 120,
-              //   endAngle: 60,
-              //   radiusFactor: 0.9,
-              //   axisLineStyle: AxisLineStyle(
-              //     thickness: 0.1,
-              //     color: Colors.transparent,
-              //
-              //   ),
-              //
-              //   majorTickStyle: MajorTickStyle(
-              //       length: 0.5,
-              //       thickness: 10,
-              //       color: Colors.transparent),
-              // ),
-
-            ]),
-
-            /*child: SfRadialGauge(
-                axes: <RadialAxis>[
-                   RadialAxis(
-                    minimum: 0,
-                    maximum: 20,
-                    showLabels: false,
-                    showTicks: false,
-                    startAngle: 90,
-                    endAngle: 45,
-                    radiusFactor: 0.7,
-                    axisLineStyle: AxisLineStyle(
-                      thickness: 0.2,
-                      color: const Color.fromARGB(30, 0, 169, 181),
-                      thicknessUnit: GaugeSizeUnit.factor,
-                    ),
-                    pointers: <GaugePointer>[
-                      RangePointer(
-                          value: 15,
-                          width: 0.05,
-                          sizeUnit: GaugeSizeUnit.factor,
-                          enableAnimation: true,
-                          animationDuration: 100,
-                          animationType: AnimationType.linear)
-                    ],
-                  ),
-                  RadialAxis(
-                    minimum: 0,
-                    interval: 1,
-                    maximum: 200,
-                    showLabels: false,
-                    showTicks: true,
-                    showAxisLine: false,
-                    tickOffset: -0.05,
-                    offsetUnit: GaugeSizeUnit.factor,
-                    minorTicksPerInterval: 0,
-                    startAngle: 140,
-                    endAngle: 40,
-                    radiusFactor: 0.7,
-                    majorTickStyle: MajorTickStyle(
-                        length: 0.3,
-                        thickness: 3,
-                        lengthUnit: GaugeSizeUnit.factor,
-                        color: Colors.white),
-                  )
-                ],
-                 title: GaugeTitle(
-                    text: 'title',
-                    textStyle: TextStyle(
-                      color: Colors.red,
-                      fontSize: 12,
-                         fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Roboto'
-                    )),
-              )*/
+                scrollDirection: Axis.vertical,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 8,
+                    childAspectRatio: 1,
+                    mainAxisSpacing: 8),
+                itemBuilder: (_, index) {
+                  return _buildDashboard(controller.dashboardList[index]);
+                },
+            ),
+             ),
           ),
+
         ],
       ),
-      bottomNavigationBar: /*BottomAppBar(
-
-          shape: CircularNotchedRectangle(), //shape of notch
-          notchMargin: 5,
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(), //shape of notch
+        notchMargin: 5,
+        child: SizedBox(
+          height: 70,
           child: Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
                 children: [
                   IconButton(
-                    onPressed: () {},
-                    icon: Icon(
+
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.homeScreen);
+                    },
+                    icon: const Icon(
                       Icons.home_filled,
                     ),
                   ),
@@ -301,18 +177,27 @@ class HomeScreen extends GetView<HomeController> {
               Column(
                 children: [
                   IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.home_filled,
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.tenantScreen);
+                    },
+                    icon: const Icon(
+                      Icons.person,
+                      color: Colors.grey,
                     ),
                   ),
-                  const Text("Home")
+                  const Text(
+                    "Tenants",
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  )
                 ],
               )
             ],
           ),
-        ),*/
-          BottomNavigationBar(
+        ),
+      ),
+      /*BottomNavigationBar(
         onTap: (index) {
           controller.selectedIndex(index);
           if (index == 1) {
@@ -336,19 +221,262 @@ class HomeScreen extends GetView<HomeController> {
               ),
               label: "Tenants")
         ],
-      ),
+      ),*/
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.toNamed(AppRoutes.qrScanScreen);
         },
         backgroundColor: bgColor,
-        child: Image.asset(
-          "assets/icon/Qr.jpg",
-          width: 30,
-          height: 30,
+        child: SvgPicture.asset(
+          "assets/icon/qricon.svg",
+          width: 25,
+          height: 25,
           fit: BoxFit.cover,
         ),
+      ),
+    );
+  }
+
+  _buildDashboard(dashboardList) {
+    return GestureDetector(
+      onTap: (){
+        controller.getDetailsByFacility(dashboardList["FacilityID"]);
+      },
+      child: Container(
+        alignment: Alignment.center,
+
+        padding: const EdgeInsets.symmetric( horizontal: 12),
+        decoration: BoxDecoration(
+            color: white,
+            border: Border.all(color: taskLightColor),
+            borderRadius: BorderRadius.circular(16)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: taskLightColor,
+                  borderRadius: BorderRadius.circular(10)),
+              child: CachedNetworkImage(imageUrl: dashboardList["FaciltyImage"],
+              height: 30,
+                width: 30,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const  SizedBox(
+              height: 12,
+            ),
+            Text(
+              dashboardList["FacilityName"].toString(),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.blue),
+            ),
+            const  SizedBox(
+              height: 12,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: LinearProgressIndicator(
+                  value: dashboardList["Completed"] /dashboardList["Total"] ,
+
+                ),
+            ),
+
+            const  SizedBox(
+              height: 10,
+            ),
+            Text.rich(
+              TextSpan(
+                text: dashboardList["Completed"].toString(),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                children:[
+                  const TextSpan(
+                    text: " / ",
+              style:  TextStyle(
+                fontSize: 12,
+                color: lightTextColor
+
+              ),
+                  ),
+                  TextSpan(
+                    text: dashboardList["Total"].toString(),
+                    style: const  TextStyle(
+                      fontSize: 12,
+                        color: lightTextColor
+                    ),
+                  )
+                ]
+
+              )
+            ),
+            const  SizedBox(
+              height: 6,
+            ),
+            dashboardList["Completed"] == dashboardList["Total"] ?
+            const Text("Completed",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                  fontSize: 10,
+                  color: Colors.green),
+            ) : const Text("Remaining",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 10,
+                  color: Colors.black54),
+            ),
+
+
+          ],
+        ),
+        /*child: SfRadialGauge(axes: <RadialAxis>[
+          RadialAxis(
+            minimum: 0,
+            maximum: 100,
+            showLabels: false,
+            showTicks: false,
+            startAngle: 120,
+            endAngle: 60,
+            radiusFactor: 0.9,
+            axisLineStyle: AxisLineStyle(
+              thickness: 0.1,
+              color: const Color.fromARGB(30, 0, 169, 181),
+              thicknessUnit: GaugeSizeUnit.factor,
+            ),
+            pointers: <GaugePointer>[
+              RangePointer(
+                value: 70,
+                width: 0.05,
+                pointerOffset: 0.07,
+                sizeUnit: GaugeSizeUnit.factor,
+              )
+            ],
+          ),
+          // Create secondary radial axis for segmented line
+          RadialAxis(
+            minimum: 0,
+            interval: 1,
+            maximum: 40,
+            showLabels: false,
+            showTicks: true,
+            showAxisLine: false,
+            tickOffset: -0.05,
+            offsetUnit: GaugeSizeUnit.factor,
+            minorTicksPerInterval: 0,
+            startAngle: 120,
+            endAngle: 60,
+            radiusFactor: 0.9,
+            majorTickStyle: MajorTickStyle(
+                length: 0.3,
+                thickness: 3,
+                lengthUnit: GaugeSizeUnit.factor,
+                color: Colors.white),
+          )
+          // Create primary radial axis
+          *//*RadialAxis(
+                  minimum: 0,
+                  interval: 1,
+                  maximum: 100,
+                  showLabels: false,
+                  showTicks: true,
+                  startAngle: 120,
+                  endAngle: 60,
+                  radiusFactor: 0.9,
+                  axisLineStyle: const AxisLineStyle(
+                    thickness: 0.2,
+                    color: Colors.transparent,
+                  ),
+
+                  majorTickStyle: const MajorTickStyle(
+                      length: 0.5,
+                      thickness: 10,
+                      color: Colors.transparent),
+                ),*//*
+          // secondary primary radial axis
+          // RadialAxis(
+          //   minimum: 0,
+          //   interval: 1,
+          //   maximum: 100,
+          //   showLabels: false,
+          //   showTicks: true,
+          //   startAngle: 120,
+          //   endAngle: 60,
+          //   radiusFactor: 0.9,
+          //   axisLineStyle: AxisLineStyle(
+          //     thickness: 0.1,
+          //     color: Colors.transparent,
+          //
+          //   ),
+          //
+          //   majorTickStyle: MajorTickStyle(
+          //       length: 0.5,
+          //       thickness: 10,
+          //       color: Colors.transparent),
+          // ),
+        ]),*/
+
+        /*child: SfRadialGauge(
+                  axes: <RadialAxis>[
+                     RadialAxis(
+                      minimum: 0,
+                      maximum: 20,
+                      showLabels: false,
+                      showTicks: false,
+                      startAngle: 90,
+                      endAngle: 45,
+                      radiusFactor: 0.7,
+                      axisLineStyle: AxisLineStyle(
+                        thickness: 0.2,
+                        color: const Color.fromARGB(30, 0, 169, 181),
+                        thicknessUnit: GaugeSizeUnit.factor,
+                      ),
+                      pointers: <GaugePointer>[
+                        RangePointer(
+                            value: 15,
+                            width: 0.05,
+                            sizeUnit: GaugeSizeUnit.factor,
+                            enableAnimation: true,
+                            animationDuration: 100,
+                            animationType: AnimationType.linear)
+                      ],
+                    ),
+                    RadialAxis(
+                      minimum: 0,
+                      interval: 1,
+                      maximum: 200,
+                      showLabels: false,
+                      showTicks: true,
+                      showAxisLine: false,
+                      tickOffset: -0.05,
+                      offsetUnit: GaugeSizeUnit.factor,
+                      minorTicksPerInterval: 0,
+                      startAngle: 140,
+                      endAngle: 40,
+                      radiusFactor: 0.7,
+                      majorTickStyle: MajorTickStyle(
+                          length: 0.3,
+                          thickness: 3,
+                          lengthUnit: GaugeSizeUnit.factor,
+                          color: Colors.white),
+                    )
+                  ],
+                   title: GaugeTitle(
+                      text: 'title',
+                      textStyle: TextStyle(
+                        color: Colors.red,
+                        fontSize: 12,
+                           fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Roboto'
+                      )),
+                )*/
       ),
     );
   }

@@ -1,28 +1,25 @@
 import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:icm/routes/app_pages.dart';
 import 'package:icm/routes/app_routes.dart';
 import 'package:icm/utils/custom_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:icm/utils/session.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //check session
-  //await GetStorage.init();
+  await GetStorage.init();
 
-  //final box = GetStorage();
+  final box = GetStorage();
 
   String initialRoute = AppRoutes.onBoardingScreen;
-  /*String path = Routes.LOGIN;
-  if (box.read(IS_LOGIN) ?? false) {
-    if (box.read(IS_SECURITY) ?? false) {
-      path = Routes.GATE_HOME;
-    } else if (box.read(IS_ADMIN) ?? false) {
-      path = Routes.HOST_HOME;
-    }
+  if (box.read(Session.isLogin) ?? false) {
+    initialRoute = AppRoutes.homeScreen;
   }
-*/
+
   runApp(MyApp(initialRoute));
 }
 
@@ -44,7 +41,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'ICM',
 
-      //navigatorKey: alice.getNavigatorKey(),
+
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: bgColor,

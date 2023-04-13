@@ -30,8 +30,9 @@ class QRScanScreen extends GetView<QRScanController> {
                     },
                     color: Colors.white,
                     icon: const Icon(Icons.arrow_back)),
-                Obx(()=>IconButton(
+                IconButton(
                     onPressed: () {
+                      // need to work in  flash button
                       controller.qrController?.toggleFlash();
                       controller.flash(
                           (controller.flash.value == Icons.flash_on)
@@ -39,7 +40,7 @@ class QRScanScreen extends GetView<QRScanController> {
                               : Icons.flash_on);
                     },
                     color: Colors.white,
-                    icon: const Icon(Icons.flash_on)),),
+                    icon: const Icon(Icons.flash_on),),
               ],
             ),
           ),

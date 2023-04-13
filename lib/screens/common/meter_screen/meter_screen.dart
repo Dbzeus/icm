@@ -40,7 +40,7 @@ class MeterScreen extends GetView<MeterController> {
                   const SizedBox(
                     width: 20,
                   ),
-                  Text(
+                  const Text(
                     "Select Meter",
                     style: TextStyle(
                         fontSize: 18,

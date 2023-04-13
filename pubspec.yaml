@@ -15,11 +15,13 @@ dependencies:
     sdk: flutter
 
   get: 4.6.5
+  cupertino_icons: ^1.0.5
   google_fonts:
   get_storage:
   dio:
   alice:
-  fluttertoast: ^8.1.2
+  flutter_svg: ^2.0.5
+  fluttertoast: ^8.2.1
   cached_network_image:
   connectivity_plus:
   flutter_native_splash:

@@ -4,6 +4,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRScanController extends GetxController {
+
+  // need to work in  flash button
   QRViewController? qrController;
   Barcode? result;
 

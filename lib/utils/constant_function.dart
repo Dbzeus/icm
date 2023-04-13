@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+
 import 'package:icm/utils/custom_colors.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
@@ -12,6 +14,8 @@ isNetConnected() async {
     toast(
       "Check Your Internet Connection",
     );
+
+   // const SnackBar(content: Text("Check Your Internet Connection",),backgroundColor: primaryColor,);
   }
   return res;
 }

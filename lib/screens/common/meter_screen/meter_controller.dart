@@ -1,3 +1,8 @@
 import 'package:get/get.dart';
 
-class MeterController extends GetxController {}
+import '../../../model/Facility.dart';
+
+class MeterController extends GetxController {
+
+  FacilityData data= Get.arguments["data"];
+}
