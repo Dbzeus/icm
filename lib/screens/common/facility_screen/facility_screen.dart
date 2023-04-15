@@ -57,7 +57,7 @@ class FacilityScreen extends GetView<FacilityController> {
                     ),
                     Expanded(
                       child: Text(
-                        "${controller.facility['FacilityName']}",
+                        "${controller.title}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(

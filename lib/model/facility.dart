@@ -99,7 +99,7 @@ class FacilityData {
     openingReading = json['OpeningReading'];
     closingReading = json['ClosingReading'];
     runningReading = json['RunningReading'];
-    unitName = json['UnitName'];
+    unitName = json['UnitName'] ?? "";
     lastReadingDate = json['LastReadingDate'];
     completed = json['Completed'];
     totalReading = json['TotalReading'];

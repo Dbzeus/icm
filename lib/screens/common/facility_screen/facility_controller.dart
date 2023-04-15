@@ -5,7 +5,7 @@ import '../../../model/facility.dart';
 
 class FacilityController extends GetxController {
 
-  var facility=Get.arguments['facility'];
+  var title=Get.arguments['title'];
   List<FacilityData> data= Get.arguments["data"];
 
   RxList<FacilityData> pendingList=RxList();

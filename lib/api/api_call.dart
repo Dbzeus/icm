@@ -120,11 +120,11 @@ class ApiCall {
     return null;
   }
 
-  Future<Facility?> getDetailByQrcode(int facilityId, String qrcode) async {
+  Future<Facility?> getDetailByQrcode(int empId, String qrcode) async {
     try {
 
       var params = {
-        "EmployeeID": facilityId,
+        "EmployeeID": empId,
         "QRCode": qrcode,
       };
       final response = await _dio.get(getAssetDetailByQrcodeUrl, queryParameters: params);
@@ -132,6 +132,7 @@ class ApiCall {
 
       return Facility.fromJson(response.data);
     } on DioError catch (e) {
+      log(e.toString());
       toast(e.response?.data['RtnMessage'] ?? e.message);
     } catch (e) {
       log(e.toString());

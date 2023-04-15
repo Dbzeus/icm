@@ -8,20 +8,17 @@ class CustomLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (){},
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        color: overlayColor,
-        child: Center(
-          child: Image.asset(
-              height: 100,
-            width: 100,
-            "assets/icon/loader.gif",
-            fit: BoxFit.cover,
-          )
-        ),
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      color: overlayColor,
+      child: Center(
+        child: Image.asset(
+            height: 100,
+          width: 100,
+          "assets/icon/loader.gif",
+          fit: BoxFit.cover,
+        )
       ),
     );
   }

@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icm/screens/qrscan/qrscan_controller.dart';
 import 'package:icm/utils/custom_colors.dart';
+import 'package:icm/widgets/custom_loader.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRScanScreen extends GetView<QRScanController> {
@@ -31,16 +31,18 @@ class QRScanScreen extends GetView<QRScanController> {
                     color: Colors.white,
                     icon: const Icon(Icons.arrow_back)),
                 IconButton(
-                    onPressed: () {
-                      // need to work in  flash button
-                      controller.qrController?.toggleFlash();
-                      controller.flash(
-                          (controller.flash.value == Icons.flash_on)
-                              ? Icons.flash_off
-                              : Icons.flash_on);
-                    },
-                    color: Colors.white,
-                    icon: const Icon(Icons.flash_on),),
+                  onPressed: () {
+                    // need to work in  flash button
+                    controller.qrController?.toggleFlash();
+                    controller.flash((controller.flash.value == Icons.flash_on)
+                        ? Icons.flash_off
+                        : Icons.flash_on);
+                  },
+                  color: Colors.white,
+                  icon: Obx(
+                    () => Icon(controller.flash.value),
+                  ),
+                ),
               ],
             ),
           ),
@@ -59,6 +61,9 @@ class QRScanScreen extends GetView<QRScanController> {
               ),
             ),
           ),
+          Obx(() => controller.isLoading.value
+              ? CustomLoader()
+              : const SizedBox.shrink()),
         ],
       ),
     );
@@ -86,14 +91,7 @@ class QRScanScreen extends GetView<QRScanController> {
             }
           },
         ),
-        Obx(() => controller.isLoading.value
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : const SizedBox.shrink()),
       ],
     );
   }
-
-
 }

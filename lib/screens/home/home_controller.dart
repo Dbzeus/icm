@@ -6,13 +6,16 @@ import 'package:icm/routes/app_routes.dart';
 import 'package:icm/utils/constant_function.dart';
 import 'package:icm/utils/session.dart';
 
+import '../../widgets/constant_widgets.dart';
+
 class HomeController extends GetxController {
   RxInt selectedIndex = 0.obs;
   RxList dashboardList = [].obs;
 
-RxBool isLoading = false.obs;
+  RxBool isLoading = false.obs;
+
   //var userData = Get.arguments["userdata"];
-  RxString  userName= "".obs;
+  RxString userName = "".obs;
   int empId = -1;
   final _box = GetStorage();
 
@@ -20,7 +23,6 @@ RxBool isLoading = false.obs;
   void onInit() {
     userName(_box.read(Session.userName) ?? "");
     empId = _box.read(Session.userId) ?? 0;
-    // TODO: implement onInit
     super.onInit();
     getDashboardDetails();
   }
@@ -41,11 +43,11 @@ RxBool isLoading = false.obs;
   getDetailsByFacility(facility) async {
     if (await isNetConnected()) {
       isLoading(true);
-      Facility? response = await ApiCall().getDetailsByFacility(empId,facility["FacilityID"]);
+      Facility? response =
+          await ApiCall().getDetailsByFacility(empId, facility["FacilityID"]);
       if (response != null && response.rtnStatus) {
-        Get.toNamed(AppRoutes.facilityScreen,
-        arguments: {
-          "facility": facility,
+        Get.toNamed(AppRoutes.facilityScreen, arguments: {
+          "title": facility['FacilityName'],
           "data": response.rtnData
         });
       } else {
@@ -53,6 +55,17 @@ RxBool isLoading = false.obs;
       }
     }
     isLoading(false);
+  }
 
+  logout() {
+    showCustomAlertDialog(
+        title: 'Logout',
+        content: 'Are you sure to logout?',
+        confirm: 'Logout',
+        cancel: 'Cancel',
+        onTabConfirm: () {
+          _box.erase();
+          Get.offAllNamed(AppRoutes.logInScreen);
+        });
   }
 }

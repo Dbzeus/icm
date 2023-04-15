@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -36,7 +35,8 @@ class ReadingController extends GetxController {
       if (response != null) {
         if (response['RtnStatus']) {
           units(response['RtnData']);
-          selectedUnit(units.value.firstWhere((element) => element['UnitName']==item.unitName));
+          selectedUnit(units.singleWhere((element) =>
+            element['UnitName'].toString().trim() == item.unitName.trim(),orElse: () => null));
         } else {
           toast('${response['RtnMessage']}');
         }

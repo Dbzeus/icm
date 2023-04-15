@@ -65,7 +65,7 @@ class HomeScreen extends GetView<HomeController> {
                       ],
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () => controller.logout(),
                       child: Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
