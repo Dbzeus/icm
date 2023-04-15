@@ -6,11 +6,11 @@
 
 class Facility {
   Facility(
-      this.rtnStatus,
-      this.rtnMessage, 
-      this.rtnData, 
-      this.otherMsg, 
-      this.id,);
+    this.rtnStatus,
+    this.rtnMessage,
+    this.rtnData,
+
+  );
 
   Facility.fromJson(dynamic json) {
     rtnStatus = json['RtnStatus'];
@@ -21,27 +21,20 @@ class Facility {
         rtnData.add(FacilityData.fromJson(v));
       });
     }
-    otherMsg = json['OtherMsg'];
-    id = json['ID'];
   }
+
   late bool rtnStatus;
   late String rtnMessage;
   late List<FacilityData> rtnData;
-  late dynamic otherMsg;
-  late int id;
+
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['RtnStatus'] = rtnStatus;
     map['RtnMessage'] = rtnMessage;
-    if (rtnData != null) {
-      map['RtnData'] = rtnData.map((v) => v.toJson()).toList();
-    }
-    map['OtherMsg'] = otherMsg;
-    map['ID'] = id;
+    map['RtnData'] = rtnData.map((v) => v.toJson()).toList();
     return map;
   }
-
 }
 
 /// EmployeeID : 1
@@ -67,26 +60,27 @@ class Facility {
 
 class FacilityData {
   FacilityData(
-      this.employeeID, 
-      this.locationID, 
-      this.locationName, 
-      this.buildingID, 
-      this.buildingName, 
-      this.tenantID, 
-      this.tenantName, 
-      this.logoPath, 
-      this.meterID, 
-      this.facilityID, 
-      this.faciltyImage, 
-      this.facilityName, 
-      this.meterName, 
-      this.openingReading, 
-      this.closingReading, 
-      this.runningReading, 
-      this.unitName, 
-      this.lastReadingDate, 
-      this.completed, 
-      this.totalReading,);
+    this.employeeID,
+    this.locationID,
+    this.locationName,
+    this.buildingID,
+    this.buildingName,
+    this.tenantID,
+    this.tenantName,
+    this.logoPath,
+    this.meterID,
+    this.facilityID,
+    this.faciltyImage,
+    this.facilityName,
+    this.meterName,
+    this.openingReading,
+    this.closingReading,
+    this.runningReading,
+    this.unitName,
+    this.lastReadingDate,
+    this.completed,
+    this.totalReading,
+  );
 
   FacilityData.fromJson(dynamic json) {
     employeeID = json['EmployeeID'];
@@ -110,26 +104,27 @@ class FacilityData {
     completed = json['Completed'];
     totalReading = json['TotalReading'];
   }
-late   int employeeID;
-late   int locationID;
-late   String locationName;
-late   int buildingID;
-late   String buildingName;
-late   int tenantID;
-late   String tenantName;
-late   String logoPath;
-late   int meterID;
-late   int facilityID;
-late   String faciltyImage;
-late   String facilityName;
-late   String meterName;
-late   double openingReading;
-late   double closingReading;
-late   double runningReading;
-late   String unitName;
-late   String lastReadingDate;
-late   bool completed;
-late   double totalReading;
+
+  late int employeeID;
+  late int locationID;
+  late String locationName;
+  late int buildingID;
+  late String buildingName;
+  late int tenantID;
+  late String tenantName;
+  late String logoPath;
+  late int meterID;
+  late int facilityID;
+  late String faciltyImage;
+  late String facilityName;
+  late String meterName;
+  late double openingReading;
+  late double closingReading;
+  late double runningReading;
+  late String unitName;
+  late String lastReadingDate;
+  late bool completed;
+  late double totalReading;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -155,5 +150,4 @@ late   double totalReading;
     map['TotalReading'] = totalReading;
     return map;
   }
-
 }

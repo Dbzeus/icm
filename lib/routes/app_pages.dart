@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:icm/routes/app_routes.dart';
+import 'package:icm/screens/common/facility_screen/facility_screen.dart';
 import 'package:icm/screens/common/meter_screen/meter_screen.dart';
 import 'package:icm/screens/common/reading_screen/reading_screen.dart';
 import 'package:icm/screens/common/service_screen/service_screen.dart';
@@ -11,9 +12,10 @@ import 'package:icm/screens/tenant/tenant_screen.dart';
 
 class AppPages {
   static final routes = [
-    GetPage(name: AppRoutes.onBoardingScreen, page: () => OnBoarding()),
+    GetPage(name: AppRoutes.onBoardingScreen, page: () => const OnBoarding()),
     GetPage(name: AppRoutes.logInScreen, page: () => LogInScreen()),
     GetPage(name: AppRoutes.homeScreen, page: () => HomeScreen()),
+    GetPage(name: AppRoutes.facilityScreen, page: () => FacilityScreen()),
     GetPage(name: AppRoutes.tenantScreen, page: () => TenantScreen()),
     GetPage(name: AppRoutes.serviceScreen, page: () => ServiceScreen()),
     GetPage(name: AppRoutes.meterScreen, page: () => MeterScreen()),

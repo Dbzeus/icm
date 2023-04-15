@@ -10,7 +10,7 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.15,
+      height: MediaQuery.of(context).size.height * 0.14,
       decoration: const BoxDecoration(
           color: primaryColor,
           borderRadius: BorderRadius.only(
@@ -20,7 +20,7 @@ class TopBar extends StatelessWidget {
       child: Stack(
         children: [
           Image.asset(
-            "assets/background/headerCircle.png",
+            "assets/background/header_circle.png",
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.cover,

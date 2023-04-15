@@ -2,23 +2,26 @@ import 'package:flutter/material.dart';
 
 class CustomLoader extends StatelessWidget {
 
-   CustomLoader({
+  CustomLoader({this.overlayColor=Colors.black26,Key? key}) : super(key: key);
 
-    Key? key}) : super(key: key);
+   Color overlayColor;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: Colors.black26,
-      child: Center(
-        child: Image.asset(
-            height: 100,
-          width: 100,
-          "assets/icon/loader.gif",
-          fit: BoxFit.cover,
-        )
+    return GestureDetector(
+      onTap: (){},
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: overlayColor,
+        child: Center(
+          child: Image.asset(
+              height: 100,
+            width: 100,
+            "assets/icon/loader.gif",
+            fit: BoxFit.cover,
+          )
+        ),
       ),
     );
   }

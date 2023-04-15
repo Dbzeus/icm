@@ -40,8 +40,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'ICM',
-
-
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: bgColor,

@@ -27,6 +27,7 @@ class QRScanController extends GetxController {
 
     qrController?.scannedDataStream.listen((scanData) async {
       result=scanData;
+
     });
   }
 

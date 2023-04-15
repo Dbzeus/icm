@@ -3,8 +3,6 @@ import 'package:geolocator/geolocator.dart';
 
 import '../widgets/constant_widgets.dart';
 
-
-
 Future<Position?> getCurrentLocation() async {
   bool serviceEnabled;
   LocationPermission permission;
@@ -13,7 +11,7 @@ Future<Position?> getCurrentLocation() async {
   if (!serviceEnabled) {
     showCustomAlertDialog(
         title: 'Location Service',
-        content: 'Location service is necessary to get location',
+        content: 'Location service is necessary to get your location',
         confirm: "Enable",
         isDismissable: false,
         onTabConfirm: () {
@@ -28,7 +26,7 @@ Future<Position?> getCurrentLocation() async {
     if (permission == LocationPermission.denied) {
       showCustomAlertDialog(
           title: 'Permission Required',
-          content: 'Location permission is required for on boarding with us',
+          content: 'Location permission is required for our app',
           confirm: "Allow",
           onTabConfirm: () {
             AppSettings.openAppSettings();
@@ -40,7 +38,7 @@ Future<Position?> getCurrentLocation() async {
   if (permission == LocationPermission.deniedForever) {
     showCustomAlertDialog(
         title: 'Permission Required',
-        content: 'Location permission is required for on boarding with us',
+        content: 'Location permission is required for our app',
         confirm: "Allow",
         onTabConfirm: () {
           AppSettings.openAppSettings();

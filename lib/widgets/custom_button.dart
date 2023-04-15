@@ -5,6 +5,7 @@ class CustomButton extends StatelessWidget {
   double? height, width;
   double? borderRadius;
   Color textColor;
+  Color btnColor;
   String text;
   Function() onTap;
   EdgeInsets? margin;
@@ -15,6 +16,7 @@ class CustomButton extends StatelessWidget {
     this.height,
     this.margin,
     this.borderRadius,
+    this.btnColor = buttonColor,
     this.textColor=white,
     required this.text,
     required this.onTap,
@@ -29,8 +31,8 @@ class CustomButton extends StatelessWidget {
         width: width ?? double.infinity,
         margin: margin,
         decoration: BoxDecoration(
-          color: buttonColor,
-          borderRadius: BorderRadius.circular(borderRadius ?? 5.0),
+          color: btnColor,
+          borderRadius: BorderRadius.circular(borderRadius ?? 5),
         ),
         child: Center(
             child: Text(

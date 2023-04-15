@@ -11,25 +11,27 @@ class OnBoarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
-          Image.asset(
-            "assets/background/bgImage.jpg",
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
+          Positioned(
+            bottom: 0,
+            child: Image.asset(
+              "assets/background/bg.png",
+              fit: BoxFit.cover,
+            ),
           ),
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Colors.white60,
-          ),
+          // Container(
+          //   width: double.infinity,
+          //   height: double.infinity,
+          //   color: Colors.white60,
+          // ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                "assets/background/fullLogo.png",
+                "assets/icon/full_logo.png",
                 width: 180,
                 height: 180,
                 fit: BoxFit.cover,

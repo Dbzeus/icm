@@ -176,7 +176,7 @@ class TenantScreen extends GetView<TenantController> {
                                     color: taskLightColor,
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Image.asset(
-                                  "assets/icon/ac.png",
+                                  "assets/icon/logo.png",
                                   width: 20,
                                   height: 20,
                                   fit: BoxFit.cover,
@@ -217,7 +217,7 @@ class TenantScreen extends GetView<TenantController> {
                                   color: taskLightColor,
                                   borderRadius: BorderRadius.circular(10)),
                               child: Image.asset(
-                                "assets/icon/ac.png",
+                                "assets/icon/logo.png",
                                 width: 20,
                                 height: 20,
                                 fit: BoxFit.cover,

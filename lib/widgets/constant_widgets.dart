@@ -17,42 +17,41 @@ Future showCustomAlertDialog({
     radius: 14,
     barrierDismissible: isDismissable,
     onWillPop: () async => isDismissable,
-    contentPadding: const EdgeInsets.all(8),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
     actions: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           cancel == null
               ? SizedBox(
-            width: Get.width * 0.3,
-          )
-               :
-              CustomButton(
+                  width: Get.width * 0.3,
+                )
+              : CustomButton(
                   height: 35,
                   width: Get.width * 0.3,
-                  borderRadius: 5.0,
-                  text: cancel, onTap: (){
-                Get.back();
-                if (onTabCancel != null) {
-                  onTabCancel();
-                }
-              }),
-
+                  text: cancel,
+                  btnColor: taskColor,
+                  textColor: Colors.black,
+                  onTap: () {
+                    Get.back();
+                    if (onTabCancel != null) {
+                      onTabCancel();
+                    }
+                  }),
           confirm == null
               ? SizedBox(
-            width: Get.width * 0.3,
-          )
-              :CustomButton(
-              height: 35,
-              width: Get.width * 0.3,
-              borderRadius: 5.0,
-              text: confirm, onTap: (){
-            Get.back();
-            if (onTabConfirm != null) {
-              onTabConfirm();
-            }
-          })
-
+                  width: Get.width * 0.3,
+                )
+              : CustomButton(
+                  height: 35,
+                  width: Get.width * 0.3,
+                  text: confirm,
+                  onTap: () {
+                    Get.back();
+                    if (onTabConfirm != null) {
+                      onTabConfirm();
+                    }
+                  })
         ],
       )
     ],
@@ -61,7 +60,7 @@ Future showCustomAlertDialog({
     content: Text(
       content,
       style: const TextStyle(
-        fontSize: 16,
+        fontSize: 15,
       ),
       textAlign: TextAlign.center,
     ),

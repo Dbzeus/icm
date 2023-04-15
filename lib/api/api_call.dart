@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:icm/api/url.dart';
-import 'package:icm/model/Facility.dart';
+import 'package:icm/model/facility.dart';
 import 'package:icm/utils/constant_function.dart';
 
 import '../main.dart';
@@ -73,7 +73,7 @@ class ApiCall {
         "EmployeeID": empId,
         "FacilityID": facilityId
       };
-      final response = await _dio.get(detailsByFacilityurl, queryParameters: params);
+      final response = await _dio.get(detailsByFacilityUrl, queryParameters: params);
       log('response code ${response.requestOptions.path} ${response.statusCode} ${response.data}');
 
       return Facility.fromJson(response.data);
@@ -85,4 +85,59 @@ class ApiCall {
     }
     return null;
   }
+
+  Future<dynamic> getUnitByFacility(int facilityId) async {
+    try {
+      var params = {
+        "FacilityID": facilityId,
+      };
+      final response = await _dio.get(unitByFacilityUrl, queryParameters: params);
+      log('response code ${response.requestOptions.path} ${response.statusCode} ${response.data}');
+
+      return response.data;
+    } on DioError catch (e) {
+      toast(e.response?.data['RtnMessage'] ?? e.message);
+    } catch (e) {
+      log(e.toString());
+      toast(null);
+    }
+    return null;
+  }
+
+  Future<dynamic> insertMeterReading(var params) async {
+    try {
+
+      final response = await _dio.post(insertOrUpdateReadingUrl, data: params);
+      log('response code ${response.requestOptions.path} ${response.statusCode} ${response.data}');
+
+      return response.data;
+    } on DioError catch (e) {
+      toast(e.response?.data['RtnMessage'] ?? e.message);
+    } catch (e) {
+      log(e.toString());
+      toast(null);
+    }
+    return null;
+  }
+
+  Future<Facility?> getDetailByQrcode(int facilityId, String qrcode) async {
+    try {
+
+      var params = {
+        "EmployeeID": facilityId,
+        "QRCode": qrcode,
+      };
+      final response = await _dio.get(getAssetDetailByQrcodeUrl, queryParameters: params);
+      log('response code ${response.requestOptions.path} ${response.statusCode} ${response.data}');
+
+      return Facility.fromJson(response.data);
+    } on DioError catch (e) {
+      toast(e.response?.data['RtnMessage'] ?? e.message);
+    } catch (e) {
+      log(e.toString());
+      toast(null);
+    }
+    return null;
+  }
+
 }

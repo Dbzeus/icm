@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:icm/api/api_call.dart';
-import 'package:icm/model/Facility.dart';
+import 'package:icm/model/facility.dart';
 import 'package:icm/routes/app_routes.dart';
 import 'package:icm/utils/constant_function.dart';
 import 'package:icm/utils/session.dart';
@@ -30,44 +29,28 @@ RxBool isLoading = false.obs;
     if (await isNetConnected()) {
       isLoading(true);
       var dashboardResponse = await ApiCall().getDashboardDetails(empId);
-      isLoading(false);
       if (dashboardResponse != null && dashboardResponse["RtnStatus"]) {
-        var temp = dashboardResponse["RtnData"];
-        var list = [];
-        list.addAll(temp);
-        list.addAll(temp);
-        list.addAll(temp);
-        list.addAll(temp);
-        list.addAll(temp);
-        list.addAll(temp);
-        dashboardList(list);
-        toast(dashboardResponse["RtnMessage"]);
+        dashboardList(dashboardResponse["RtnData"]);
       } else {
         toast(dashboardResponse["RtnMessage"]);
       }
-    } else {
-      toast("Something went wrong");
     }
     isLoading(false);
-
   }
 
-  getDetailsByFacility(int facilityId) async {
+  getDetailsByFacility(facility) async {
     if (await isNetConnected()) {
       isLoading(true);
-      Facility? response = await ApiCall().getDetailsByFacility(empId,facilityId);
-      isLoading(false);
+      Facility? response = await ApiCall().getDetailsByFacility(empId,facility["FacilityID"]);
       if (response != null && response.rtnStatus) {
-        Get.toNamed(AppRoutes.meterScreen,
+        Get.toNamed(AppRoutes.facilityScreen,
         arguments: {
+          "facility": facility,
           "data": response.rtnData
         });
-        toast(response.rtnMessage);
       } else {
         toast(response?.rtnMessage);
       }
-    } else {
-      toast("Something went wrong");
     }
     isLoading(false);
 

@@ -4,5 +4,5 @@ import '../../../model/Facility.dart';
 
 class MeterController extends GetxController {
 
-  FacilityData data= Get.arguments["data"];
+  List<FacilityData> data= Get.arguments["data"];
 }

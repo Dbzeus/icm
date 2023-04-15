@@ -6,6 +6,7 @@ import 'package:icm/utils/custom_colors.dart';
 import 'package:icm/widgets/top_bar.dart';
 
 class MeterScreen extends GetView<MeterController> {
+  @override
   final controller = Get.put(MeterController());
   MeterScreen({Key? key}) : super(key: key);
 
