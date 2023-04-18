@@ -25,6 +25,7 @@ class HomeController extends GetxController {
     empId = _box.read(Session.userId) ?? 0;
     super.onInit();
     getDashboardDetails();
+    notificationPermission();
   }
 
   getDashboardDetails() async {
@@ -65,7 +66,7 @@ class HomeController extends GetxController {
         cancel: 'Cancel',
         onTabConfirm: () {
           _box.erase();
-          Get.offAllNamed(AppRoutes.logInScreen);
+          Get.offAllNamed(AppRoutes.onBoardingScreen);
         });
   }
 }

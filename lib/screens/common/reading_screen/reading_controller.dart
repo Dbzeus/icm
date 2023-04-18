@@ -149,7 +149,12 @@ class ReadingController extends GetxController {
         if(response['RtnStatus']){
           var controller=Get.find<HomeController>();
           controller.getDashboardDetails();
-          Get.back(result: true);
+           var argument = {
+             "closing" : double.parse(currentReadingController.text),
+             "running" : double.parse(currentReadingController.text.trim()) - item.openingReading,
+             "unit" : selectedUnit.value['UnitName'],
+           };
+          Get.back(result: argument);
         }
       }
       isLoading(false);

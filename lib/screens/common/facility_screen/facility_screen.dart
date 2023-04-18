@@ -77,32 +77,45 @@ class FacilityScreen extends GetView<FacilityController> {
               const SizedBox(
                 height: 16,
               ),
-              Obx(
-                () => CupertinoSegmentedControl<bool>(
-                  children: const <bool, Widget>{
-                    false: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Text(
+              Obx(()=>
+                 Container(
+
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(horizontal: 18),
+                  child: CupertinoSlidingSegmentedControl(
+
+                    groupValue:  controller.selectedTag.value,
+                    padding: const EdgeInsets.all(6),
+                    onValueChanged: (value) {
+                      controller.selectedTag(value);
+                      debugPrint(controller.selectedTag.value.toString());
+                    },
+                    children:  const  <bool, Widget> {
+
+                      false:   Text(
                         "Pending",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                          /*color: controller.selectedTag.value
+                              ? primaryColor
+                              : lightTextColor*/),
                       ),
-                    ),
-                    true: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Text(
+                      true:  Text(
                         "Completed",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                          /*color: controller.selectedTag.value
+                              ? primaryColor
+                              : lightTextColor*/),
                       ),
-                    ),
-                  },
-                  onValueChanged: (value) {
-                    controller.selectedTag(value);
-                  },
-                  selectedColor: primaryColor,
-                  unselectedColor: Colors.white,
-                  borderColor: Colors.grey,
-                  pressedColor: Colors.grey,
-                  groupValue: controller.selectedTag.value,
+
+                    },
+                  ),
                 ),
               ),
+
               Expanded(
                 child: Obx(() => controller.selectedTag.value
                     ? controller.completedList.isEmpty
@@ -138,8 +151,9 @@ class FacilityScreen extends GetView<FacilityController> {
           ? () async {
               var res =
                   await Get.toNamed(AppRoutes.readingScreen, arguments: item);
-              if (res != null && res) {
-                controller.updateCompletedData(item);
+              if (res != null) {
+
+                controller.updateCompletedData(item,res);
               }
             }
           : null,
@@ -148,6 +162,7 @@ class FacilityScreen extends GetView<FacilityController> {
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
         decoration: BoxDecoration(
+            color: white,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: taskLightColor)),
         child: Row(
@@ -162,7 +177,7 @@ class FacilityScreen extends GetView<FacilityController> {
               ),
             ),
             const SizedBox(
-              width: 12,
+              width: 16,
             ),
             Expanded(
               child: Column(
@@ -187,6 +202,72 @@ class FacilityScreen extends GetView<FacilityController> {
                     style: const TextStyle(fontSize: 12, color: lightTextColor),
                   ),
                   const Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          const Text("Opening",
+                              style: TextStyle(
+                                fontSize: 12,
+                              )),
+                          Text(item.openingReading.toString(),
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text("Closing",
+                              style: TextStyle(
+                                fontSize: 12,
+                              )),
+                          Text(item.closingReading.toString(),
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text("Running",
+                              style: TextStyle(
+                                fontSize: 12,
+                              )),
+                          Text(item.runningReading.toString(),
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text("Unit",
+                              style: TextStyle(
+                                fontSize: 12,
+                              )),
+                          Text(item.unitName.toString(),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.deepOrangeAccent,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ],
+                      ),
+
+                    ],
+                  ),
+                  const Divider(),
+
                   Row(
                     children: [
                       CircleAvatar(
@@ -217,4 +298,126 @@ class FacilityScreen extends GetView<FacilityController> {
       ),
     );
   }
+
+  /*_buildFacilityItem1(FacilityData item, bool isClickable) {
+    return  Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListTile(
+            onTap:isClickable ? ()async {
+              var res =
+                  await Get.toNamed(AppRoutes.readingScreen, arguments: item);
+              if (res != null) {
+                controller.updateCompletedData(item,res);
+              }
+            } : null,
+
+
+            leading:  CircleAvatar(
+
+              backgroundImage:
+              CachedNetworkImageProvider(
+                item.faciltyImage,
+
+
+              ),
+
+              radius: 25,
+            ),
+            title:  Text(
+              item.meterName,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                  fontWeight: FontWeight.w600, fontSize: 14, color: primaryColor),
+            ),
+
+
+            subtitle:  Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${item.locationName} . ${item.buildingName}",
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontSize: 14, color: lightTextColor),
+                ),
+                isClickable? const SizedBox.shrink() :const Divider(),
+                isClickable? const SizedBox.shrink() : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        const Text("Opening",
+                            style: TextStyle(
+                              fontSize: 12,
+                            )),
+                        Text(item.openingReading.toString(),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        const Text("Closing",
+                            style: TextStyle(
+                              fontSize: 12,
+                            )),
+                        Text(item.closingReading.toString(),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        const Text("Running",
+                            style: TextStyle(
+                              fontSize: 12,
+                            )),
+                        Text(item.runningReading.toString(),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ],
+                    ),
+
+                  ],
+                ),
+                const Divider(),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 10,
+                      backgroundImage: CachedNetworkImageProvider(
+                        item.logoPath,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 6,
+                    ),
+                    Text(
+                      item.tenantName,
+                      style: const TextStyle(fontSize: 10),
+                    ),
+                    const Spacer(),
+                    Text(
+                      item.lastReadingDate,
+                      style: const TextStyle(fontSize: 10),
+                    )
+                  ],
+                )
+              ],
+            ),
+            isThreeLine: true,
+            dense: true,
+          ),
+          const Divider(),
+        ],
+      );
+  }*/
 }

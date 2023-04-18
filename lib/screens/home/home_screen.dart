@@ -34,14 +34,11 @@ class HomeScreen extends GetView<HomeController> {
                   children: [
                     Row(
                       children: [
-                        const CircleAvatar(
-                          backgroundColor: bgColor,
+                        const  CircleAvatar(
+                          backgroundImage: AssetImage("assets/icon/logo.png"),
+                          backgroundColor: Colors.white,
                           radius: 23,
-                          child: CircleAvatar(
-                            backgroundImage: AssetImage("assets/icon/logo.png"),
-                            backgroundColor: Colors.white,
-                            radius: 23,
-                          ),
+
                         ),
                         const SizedBox(
                           width: 16,
@@ -152,7 +149,7 @@ class HomeScreen extends GetView<HomeController> {
                     ),
                   ),
                   InkWell(
-                    onTap: () => Get.toNamed(AppRoutes.tenantScreen),
+                    onTap: () {}, //Get.toNamed(AppRoutes.tenantScreen),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

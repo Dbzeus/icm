@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icm/routes/app_routes.dart';
+import 'package:icm/utils/constant_function.dart';
 
 import 'package:icm/widgets/custom_button.dart';
 
@@ -42,7 +43,8 @@ class OnBoarding extends StatelessWidget {
               CustomButton(
                 text: "Get Started ->",
                 onTap: () {
-                  Get.toNamed(AppRoutes.logInScreen);
+
+                 Get.toNamed(AppRoutes.logInScreen);
                 },
                 margin: const EdgeInsets.symmetric(horizontal: 12),
                 borderRadius: 5.0,

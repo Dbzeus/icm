@@ -6,12 +6,14 @@ import 'package:icm/routes/app_pages.dart';
 import 'package:icm/routes/app_routes.dart';
 import 'package:icm/utils/custom_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:icm/utils/notification.dart';
 import 'package:icm/utils/session.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //check session
   await GetStorage.init();
+  await FirebaseNotifcation().initialize();
 
   final box = GetStorage();
 
@@ -25,16 +27,18 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   String initialRoute;
-  static Alice alice = Alice(
-    showNotification: true,
-    showInspectorOnShake: true,
-  );
+
 
   MyApp(
     this.initialRoute, {
     Key? key,
   }) : super(key: key);
 
+  static Alice alice = Alice(
+    showNotification: true,
+    showInspectorOnShake: true,
+
+  );
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

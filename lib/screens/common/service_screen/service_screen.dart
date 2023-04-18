@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icm/screens/common/service_screen/service_controller.dart';
@@ -7,6 +8,7 @@ import '../../../widgets/custom_edittext.dart';
 import '../../../widgets/top_bar.dart';
 
 class ServiceScreen extends GetView<ServiceController> {
+  @override
   final controller = Get.put(ServiceController());
   ServiceScreen({Key? key}) : super(key: key);
 
@@ -45,7 +47,7 @@ class ServiceScreen extends GetView<ServiceController> {
                     const SizedBox(
                       width: 20,
                     ),
-                    Text(
+                    const Text(
                       "Service",
                       style: TextStyle(
                           fontSize: 18,
@@ -69,6 +71,41 @@ class ServiceScreen extends GetView<ServiceController> {
             ),
             const SizedBox(
               height: 15,
+            ),
+            Container(
+              height: 60,
+              width: double.infinity,
+              margin: const EdgeInsets.symmetric(horizontal: 18),
+              child: CupertinoSlidingSegmentedControl(
+
+                groupValue: 1,
+                padding: const EdgeInsets.all(6),
+                onValueChanged: (value) {
+
+                },
+                children:  const {
+
+                  1:  Text(
+                    "Pending",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                        /*color: controller.isTask.value
+                            ? primaryColor
+                            : lightTextColor*/),
+                  ),
+                  2: Text(
+                    "Completed",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                        /*color: !controller.isTask.value
+                            ? primaryColor
+                            : lightTextColor*/),
+                  ),
+
+                },
+              ),
             ),
             Obx(
               () => Container(

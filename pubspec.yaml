@@ -30,6 +30,14 @@ dependencies:
   qr_code_scanner:
   geolocator:
   app_settings:
+  permission_handler:
+
+  #firebase
+  firebase_core:
+  firebase_crashlytics:
+  firebase_messaging:
+  flutter_local_notifications:
+
 
 
 dev_dependencies:
@@ -45,7 +53,7 @@ flutter_icons:
   image_path: "assets/icon/logo.png"
   min_sdk_android: 20 # android min sdk min:16, default 21
   remove_alpha_ios: true
-  adaptive_icon_background: "#000000"
+  adaptive_icon_background: "#FFFFFF"
   adaptive_icon_foreground: "assets/icon/logo.png"
 
 

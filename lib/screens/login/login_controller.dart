@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -7,6 +9,7 @@ import 'package:icm/utils/constant_function.dart';
 import 'package:icm/utils/session.dart';
 
 import '../../routes/app_routes.dart';
+import '../../widgets/constant_widgets.dart';
 
 class LogInController extends GetxController {
   TextEditingController userNameController = TextEditingController();
@@ -21,6 +24,8 @@ class LogInController extends GetxController {
 
   logIn() async {
     Get.focusScope!.unfocus();
+
+
     if (userNameController.text.isEmpty) {
       toast("Enter user Name");
     } else if (passwordController.text.isEmpty) {
@@ -33,6 +38,7 @@ class LogInController extends GetxController {
         // debugPrint("longtitude: ${location?.longitude.toString()}");
         // if (location != null) {
           isLoading(true);
+          notificationPermission();
 
           var loginResponse = await ApiCall().checkLogin(
               userNameController.text,
@@ -64,4 +70,6 @@ class LogInController extends GetxController {
       }
     }
   }
+
+
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "627840362801",
+    "project_id": "icm-app-6796f",
+    "storage_bucket": "icm-app-6796f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627840362801:android:e40f95a21284e913112810",
+        "android_client_info": {
+          "package_name": "com.dbzeus.icm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627840362801-a9dochdci89s98ugspplo9lvvaa9k2h3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNA2qVYk43YBvGWq2SF_OCYFmz8osg1IE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627840362801-a9dochdci89s98ugspplo9lvvaa9k2h3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
